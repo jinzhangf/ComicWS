@@ -15,6 +15,20 @@ int C(int n, int m)
 	return A(n, m) / A(m, m);
 }
 
+vector<vector<int>> combine2(const vector<int> &vec)
+{
+	vector<vector<int>> ret;
+	for (size_t i = 0; i < vec.size() - 1; ++i) {
+		for (size_t j = i + 1; j < vec.size(); ++j) {
+			vector<int> tmp;
+			tmp.push_back(vec[i]);
+			tmp.push_back(vec[j]);
+			ret.push_back(tmp);
+		}
+	}
+	return ret;
+}
+
 inline int min(int a, int b)
 {
 	return a < b ? a : b;
@@ -63,5 +77,36 @@ vector<vector<double> > normalize(const vector<vector<int> > &input)
 	}
 	return output;
 }
+
+
+vector<int> erase_cold(const vector<int> &data, const vector<double> &cold, int n)
+{
+	map<double, vector<int>> table;
+	for (auto val : data) {
+		double cold_val = cold[val - 1];
+		table[cold_val].push_back(val);
+	}
+
+	vector<int> ret;
+	for (auto &item : table) {
+		for (auto val : item.second) {
+			if (n > 0) {
+				n--;
+				continue;
+			}
+			ret.push_back(val);
+		}
+	}
+	return ret;
+}
+
+
+
+
+
+
+
+
+
 
 

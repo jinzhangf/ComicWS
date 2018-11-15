@@ -25,9 +25,11 @@ public:
 
 	int get_hot_data(int type, int num);
 	vector<int> get_hot_data(int type);
+	vector<double> get_hot_data_stats();
 
 	int get_hot_rel_two(int type, int num1, int num2);
 	vector<vector<int> > get_hot_rel_two(int type);
+	vector<vector<double> > get_hot_rel_two_stats();
 
 	void display_hot(int type);
 	void display_data(int n);

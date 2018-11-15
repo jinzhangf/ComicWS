@@ -14,7 +14,8 @@ struct OneBet
 {
 	PlayType _play_type;
 	vector<int> _nums;
-	vector<int> _score;
+	double _hot_score;
+	double _rel_score;
 	int _money;
 };
 

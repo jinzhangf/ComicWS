@@ -5,9 +5,9 @@
 void print_help()
 {
 	cout << "***************** help doc *****************" << endl;
-	cout << " 1) read data" << endl;
-	cout << " 2) display data" << endl;
-	cout << " 3) display hot statiscs" << endl;
+	cout << " 1) read data (with 5 nums)" << endl;
+	cout << " 2) display data (with n)" << endl;
+	cout << " 3) display hot statiscs (with type)" << endl;
 	cout << "********************************************" << endl << endl;
 }
 
@@ -81,9 +81,6 @@ int main(int argc, char *argv[])
 				break;
 		}
 	}
-	//hot.display(100);
-	//hot.display(5);
-
 	
 	return 0;
 }

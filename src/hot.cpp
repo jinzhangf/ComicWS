@@ -58,6 +58,22 @@ vector<int> Hot::get_hot_data(int type)
 	return ret;
 }
 
+vector<double> Hot::get_hot_data_stats()
+{
+	vector<double> ret(11, 0);
+	for (auto type : _types) {
+		vector<int> hot_data = get_hot_data(type);
+		vector<double> nml = normalize(hot_data);
+		for (size_t i = 0; i < nml.size(); ++i) {
+			ret[i] += nml[i];
+		}
+	}
+	for (size_t i = 0; i < ret.size(); ++i) {
+		ret[i] /= _types.size();
+	}
+	return ret;
+}
+
 void Hot::inc_hot_data(int type, int num)
 {
 	_hot_data[type]._hd[to_index(num)]++;
@@ -78,6 +94,26 @@ vector<vector<int> > Hot::get_hot_rel_two(int type)
 			vec.push_back(val);
 		}
 		ret.push_back(vec);
+	}
+	return ret;
+}
+
+vector<vector<double> > Hot::get_hot_rel_two_stats()
+{
+	vector<vector<double>> ret(11, vector<double> (11, 0));
+	for (auto type : _types) {
+		vector<vector<int> > hot_rel = get_hot_rel_two(type);
+		vector<vector<double> > nml = normalize(hot_rel);
+		for (size_t i = 0; i < nml.size(); ++i) {
+			for (size_t j = 0; j < nml.size(); ++j) {
+				ret[i][j] += nml[i][j];
+			}
+		}
+	}
+	for (size_t i = 0; i < ret.size(); ++i) {
+		for (size_t j = 0; j < ret.size(); ++j) {
+			ret[i][j] /= _types.size();
+		}
 	}
 	return ret;
 }
