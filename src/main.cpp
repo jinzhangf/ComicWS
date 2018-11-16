@@ -7,7 +7,8 @@ void print_help()
 	cout << "***************** help doc *****************" << endl;
 	cout << " a) read data (with 5 nums)" << endl;
 	cout << " b) display data (with n)" << endl;
-	cout << " c) display hot statiscs (with type)" << endl;
+	cout << " c) display hot statiscs (origin)" << endl;
+	cout << " d) display hot statiscs (normalized)" << endl;
 	cout << "********************************************" << endl << endl;
 }
 
@@ -35,18 +36,6 @@ void display_data(Hot &hot)
 	hot.display_data(n);
 }
 
-void display_hot(Hot &hot)
-{
-	int type;
-	cin >> type;
-	if (!cin) {
-		cerr << "display_hot wrong." << endl;
-		exit(1);
-	}
-
-	hot.display_hot(type);
-}
-
 int main(int argc, char *argv[])
 {
 	if (argc != 2) {
@@ -69,7 +58,10 @@ int main(int argc, char *argv[])
 				display_data(hot);
 				break;
 			case 'c':
-				display_hot(hot);
+				hot.display_hot_origin();
+				break;
+			case 'd':
+				hot.display_hot_stats();
 				break;
 			default:
 				print_help();

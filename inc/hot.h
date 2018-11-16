@@ -31,7 +31,8 @@ public:
 	vector<vector<int>> get_hot_rel_two(int type);
 	vector<vector<double>> get_hot_rel_two_stats();
 
-	void display_hot(int type);
+	void display_hot_origin();
+	void display_hot_stats();
 	void display_data(int n);
 
 private:

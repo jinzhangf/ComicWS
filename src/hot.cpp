@@ -195,27 +195,51 @@ inline char to_char(int num)
 	return 'A';
 }
 
-void Hot::display_hot(int type)
+void Hot::display_hot_origin()
 {
-	cout << "type: " << type << endl;
-	cout << "hot data: ";
-	for (int num = 1; num <= 11; ++num) {
-		cout << to_char(num) << "(" << get_hot_data(type, num) << ") ";
-	}
-	cout << endl;
-
-	cout << "hot rel: " << endl;
-	for (int num1 = 1; num1 <= 11; ++num1) {
-		cout << to_char(num1) << ":\t";
-		for (int num2 = 1; num2 <= 11; ++num2) {
-			cout << to_char(num1) << "," << to_char(num2) << "(" 
-			     << get_hot_rel_two(type, num1, num2) << ")\t";
+	for (auto type : _types) {
+		cout << "type: " << type << endl;
+		for (int num = 1; num <= 11; ++num) {
+			cout << to_char(num) << "(" << get_hot_data(type, num) << ") ";
 		}
 		cout << endl;
 	}
-	cout << endl;
+
+
+	// cout << "hot rel: " << endl;
+	// for (int num1 = 1; num1 <= 11; ++num1) {
+	// 	cout << to_char(num1) << ":\t";
+	// 	for (int num2 = 1; num2 <= 11; ++num2) {
+	// 		cout << to_char(num1) << "," << to_char(num2) << "(" 
+	// 		     << get_hot_rel_two(type, num1, num2) << ")\t";
+	// 	}
+	// 	cout << endl;
+	// }
+	// cout << endl;
 }
 
+void Hot::display_hot_stats()
+{
+	vector<double> ret(11, 0);
+	for (auto type : _types) {
+		vector<int> hot_data = get_hot_data(type);
+		vector<double> nml = normalize(hot_data);
+		cout << "type:" << type << " - ";
+		for (size_t i  = 0; i < nml.size(); ++i) {
+			cout << nml[i] << " ";
+		}
+		cout << endl;
+		for (size_t i = 0; i < nml.size(); ++i) {
+			ret[i] += nml[i];
+		}
+	}
+	cout << "all : " << " - ";
+	for (size_t i = 0; i < ret.size(); ++i) {
+		ret[i] /= _types.size();
+		cout << ret[i] << " ";
+	}
+	cout << endl;
+}
 void Hot::display_data(int n)
 {
 	int i = _data.size() > n ? _data.size() - n : 0;
