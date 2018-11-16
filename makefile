@@ -1,3 +1,4 @@
+#to use release, run 'make ver=release'
 ver = debug
 
 CC = g++

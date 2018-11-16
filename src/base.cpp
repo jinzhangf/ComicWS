@@ -55,7 +55,7 @@ vector<double> normalize(const vector<int> &input)
 	return output;
 }
 
-vector<vector<double> > normalize(const vector<vector<int> > &input)
+vector<vector<double>> normalize(const vector<vector<int>> &input)
 {
 	int min_val = INT_MAX;
 	int max_val = INT_MIN;
@@ -66,7 +66,7 @@ vector<vector<double> > normalize(const vector<vector<int> > &input)
 		}
 	}
 
-	vector<vector<double> > output;
+	vector<vector<double>> output;
 	for (size_t i = 0; i < input.size(); ++i) {
 		vector<double> vec;
 		for (size_t j = 0; j < input[0].size(); ++j) {

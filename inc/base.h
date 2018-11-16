@@ -6,9 +6,10 @@
 #include <set>
 #include <string>
 
-
 #include <cstdlib>
 #include <cstdio>
+
+#include "const.h"
 
 #ifdef _DEBUG
 #define DEBUG_LOG(fmt, args...) \
@@ -20,6 +21,18 @@
     } while(0)
 #else
 #define DEBUG_LOG(fmt, args...) \
+    do { \
+    } while(0)
+#endif
+
+#ifdef _DEBUG
+#define input() \
+    do \
+    { \
+        printf("input:"); \
+    } while(0)
+#else
+#define input() \
     do { \
     } while(0)
 #endif
@@ -37,7 +50,7 @@ vector<vector<int>> combine2(const vector<int> &vec);
 vector<double> normalize(const vector<int> &input);
 
 // 标准化
-vector<vector<double> > normalize(const vector<vector<int> > &input);
+vector<vector<double>> normalize(const vector<vector<int>> &input);
 
 // 剔除冷数据，n是冷数据个数
 vector<int> erase_cold(const vector<int> &data, const vector<double> &cold, int n);

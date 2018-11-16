@@ -5,9 +5,9 @@
 void print_help()
 {
 	cout << "***************** help doc *****************" << endl;
-	cout << " 1) read data (with 5 nums)" << endl;
-	cout << " 2) display data (with n)" << endl;
-	cout << " 3) display hot statiscs (with type)" << endl;
+	cout << " a) read data (with 5 nums)" << endl;
+	cout << " b) display data (with n)" << endl;
+	cout << " c) display hot statiscs (with type)" << endl;
 	cout << "********************************************" << endl << endl;
 }
 
@@ -21,7 +21,6 @@ void read_data(Hot &hot)
 	}
 
 	hot.read_data(nums);
-	cout << "read_data success!" << endl << endl;
 }
 
 void display_data(Hot &hot)
@@ -54,28 +53,34 @@ int main(int argc, char *argv[])
         cerr << "argc should be 2" << endl;
         return -1;
 	}
-
-	DEBUG_LOG("HELLO %d", 3);
 	
 	Hot hot(argv[1]);
 	Bet bet(hot);
 	print_help();
-	int cmd;
+	input();
+	char cmd;
 	while (cin >> cmd) {
 		switch(cmd) {
-			case 1:
+			case 'a':
 				read_data(hot);
 				bet.bet();
 				break;
-			case 2:
+			case 'b':
 				display_data(hot);
 				break;
-			case 3:
+			case 'c':
 				display_hot(hot);
+				break;
 			default:
 				print_help();
 				break;
 		}
+		input();
+	}
+
+	if (!cin) {
+		cerr << "wrong cmd." << endl;
+		exit(1);
 	}
 	
 	return 0;

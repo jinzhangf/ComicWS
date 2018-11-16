@@ -4,12 +4,13 @@
 Bet::Bet(Hot &hot) : _hot(hot)
 {
 	// empty
+	_money = INIT_MONEY;
 }
 
 void Bet::bet()
 {
 	cal_last_bet();
-	Strategy *stg1 = new Strategy1(_money / 10, _hot);
+	Strategy *stg1 = new Strategy1(_money, _hot);
 	vector<OneBet> bets = stg1->make_decision();
 	_all_bets.insert(_all_bets.end(), bets.begin(), bets.end());
 }
@@ -17,19 +18,30 @@ void Bet::bet()
 inline bool check_one_bet(const OneBet & one_bet)
 {
 	if ((size_t)one_bet._play_type != one_bet._nums.size()) {
-		cerr << "PlayType:" << one_bet._play_type 
+		cerr << "Error: PlayType:" << one_bet._play_type 
 		     << ", nums.size=" << one_bet._nums.size() << endl;
-		return false;
+		exit(1);
 	}
 	return true;
 }
 
-void display_one_bet(bool won, const OneBet & one_bet)
+void Bet::display_one_bet(bool won, const OneBet &one_bet)
 {
-	cout << won << " " << one_bet._play_type << " ";
+	cout << "won:" << won << " ";
+	cout << "type:"<< one_bet._play_type << " ";
+	cout << "nums:";
+	for (auto num : one_bet._nums) {
+		cout << num;
+		if (num != one_bet._nums.back()) {
+			cout << ",";
+		}
+	}
+	cout << " ";
+	cout << "hot_score:" << one_bet._hot_score << " ";
+	cout << "rel_score:" << one_bet._rel_score << " ";
+	cout << "money:" << _money;
 	cout << endl;
 }
-
 
 void Bet::cal_last_bet()
 {

@@ -8,11 +8,11 @@
 class Strategy1 : public Strategy
 {
 public:
-	Strategy1(int money, Hot &hot);
+	Strategy1(int &money, Hot &hot);
 	virtual vector<OneBet> make_decision();
 
 private:
-	int _money;
+	int &_money;
 	Hot &_hot;
 };
 

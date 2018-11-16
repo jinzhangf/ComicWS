@@ -15,6 +15,7 @@ public:
 
 private:
 	void cal_last_bet();
+	void display_one_bet(bool won, const OneBet &one_bet);
 
 	Hot &_hot;
 	int _money;

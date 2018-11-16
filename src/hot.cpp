@@ -16,11 +16,11 @@ Hot::Hot(const string &pre_file) : _types({5, 30, 50, 100})
 	}
 
 	// read data
-	map<int, vector<int> > table; // key is used for sorting
+	map<int, vector<int>> table; // key is used for sorting
 	ifstream infile(pre_file.c_str());
 	if (!infile) {
 		cerr << "cannot open file " << pre_file << endl;
-		return;
+		exit(1);
 	}
 
 	string line;
@@ -84,9 +84,9 @@ int Hot::get_hot_rel_two(int type, int num1, int num2)
 	return _hot_rel[type]._hr[to_index(num1)][to_index(num2)];
 }
 
-vector<vector<int> > Hot::get_hot_rel_two(int type)
+vector<vector<int>> Hot::get_hot_rel_two(int type)
 {
-	vector<vector<int> > ret;
+	vector<vector<int>> ret;
 	for (int i = 0; i < 11; ++i) {
 		vector<int> vec;
 		for (int j = 0; j < 11; ++j) {
@@ -98,12 +98,12 @@ vector<vector<int> > Hot::get_hot_rel_two(int type)
 	return ret;
 }
 
-vector<vector<double> > Hot::get_hot_rel_two_stats()
+vector<vector<double>> Hot::get_hot_rel_two_stats()
 {
 	vector<vector<double>> ret(11, vector<double> (11, 0));
 	for (auto type : _types) {
-		vector<vector<int> > hot_rel = get_hot_rel_two(type);
-		vector<vector<double> > nml = normalize(hot_rel);
+		vector<vector<int>> hot_rel = get_hot_rel_two(type);
+		vector<vector<double>> nml = normalize(hot_rel);
 		for (size_t i = 0; i < nml.size(); ++i) {
 			for (size_t j = 0; j < nml.size(); ++j) {
 				ret[i][j] += nml[i][j];
@@ -213,6 +213,7 @@ void Hot::display_hot(int type)
 		}
 		cout << endl;
 	}
+	cout << endl;
 }
 
 void Hot::display_data(int n)
