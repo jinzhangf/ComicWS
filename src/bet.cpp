@@ -39,7 +39,7 @@ void Bet::display_one_bet(bool won, const OneBet &one_bet)
 	cout << " ";
 	cout << "hot_score:" << one_bet._hot_score << " ";
 	cout << "rel_score:" << one_bet._rel_score << " ";
-	cout << "money:" << _money;
+	cout << "m:" << _money;
 	cout << endl;
 }
 

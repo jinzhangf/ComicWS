@@ -18,13 +18,14 @@ vector<OneBet> Strategy1::make_decision()
 		int a = item[0];
 		int b = item[1];
 		OneBet onebet;
-		onebet._money = 2;
+		onebet._money = 200;
 		onebet._play_type = PLAY_TWO;
 		onebet._nums.push_back(a);
 		onebet._nums.push_back(b);
 		onebet._hot_score = hot_stats[a-1] + hot_stats[b-1];
 		onebet._rel_score = rel_stats[a-1][b-1] + rel_stats[b-1][a-1];
 		ret.push_back(onebet);
+		_money -= onebet._money;
 	}
 
 	return ret;
