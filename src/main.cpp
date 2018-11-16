@@ -17,9 +17,7 @@ void read_data(Hot &hot)
 	cin >> nums[0] >> nums[1] >> nums[2] >> nums[3] >> nums[4];
 	if (!cin) {
 		cerr << "read_data wrong." << endl;
-		cin.clear();
-		cin.sync();
-		return;
+		exit(1);
 	}
 
 	hot.read_data(nums);
@@ -32,9 +30,7 @@ void display_data(Hot &hot)
 	cin >> n;
 	if (!cin) {
 		cerr << "display_data wrong." << endl;
-		cin.clear();
-		cin.sync();
-		return;
+		exit(1);
 	}
 
 	hot.display_data(n);
@@ -46,9 +42,7 @@ void display_hot(Hot &hot)
 	cin >> type;
 	if (!cin) {
 		cerr << "display_hot wrong." << endl;
-		cin.clear();
-		cin.sync();
-		return;
+		exit(1);
 	}
 
 	hot.display_hot(type);
@@ -60,6 +54,8 @@ int main(int argc, char *argv[])
         cerr << "argc should be 2" << endl;
         return -1;
 	}
+
+	DEBUG_LOG("HELLO %d", 3);
 	
 	Hot hot(argv[1]);
 	Bet bet(hot);

@@ -10,6 +10,20 @@
 #include <cstdlib>
 #include <cstdio>
 
+#ifdef _DEBUG
+#define DEBUG_LOG(fmt, args...) \
+    do \
+    { \
+        printf("[debug] "); \
+        printf(fmt, ##args); \
+        printf("\n"); \
+    } while(0)
+#else
+#define DEBUG_LOG(fmt, args...) \
+    do { \
+    } while(0)
+#endif
+
 using namespace std;
 
 int A(int, int);

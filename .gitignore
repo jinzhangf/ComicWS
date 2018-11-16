@@ -2,4 +2,4 @@ src/*.o
 lottery
 .DS_Store
 *.txt
-
+lottery.exe
