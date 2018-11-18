@@ -9,6 +9,7 @@ class Strategy1 : public Strategy
 {
 public:
 	Strategy1(int &money, Hot &hot);
+	virtual ~Strategy1();
 	virtual vector<OneBet> make_decision();
 
 private:

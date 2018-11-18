@@ -3,6 +3,12 @@
 Strategy1::Strategy1(int &money, Hot &hot) : _money(money), _hot(hot)
 {
 	//empty
+	cout << "Strategy1 !" << endl;
+}
+
+Strategy1::~Strategy1()
+{
+	cout << "Strategy1 ~" << endl;
 }
 
 vector<OneBet> Strategy1::make_decision()
@@ -18,15 +24,15 @@ vector<OneBet> Strategy1::make_decision()
 		int a = item[0];
 		int b = item[1];
 		OneBet onebet;
-		onebet._money = 200;
 		onebet._play_type = PLAY_TWO;
 		onebet._nums.push_back(a);
 		onebet._nums.push_back(b);
+		set_bet_money(5, 10, 0.3, onebet);
 		onebet._hot_score = hot_stats[a-1] + hot_stats[b-1];
 		onebet._rel_score = rel_stats[a-1][b-1] + rel_stats[b-1][a-1];
 		if (onebet._hot_score > 1.7 && onebet._rel_score > 1.7) {
 			ret.push_back(onebet);
-			_money -= onebet._money;
+			_money -= std::accumulate(onebet._money.begin(), onebet._money.end(), 0);
 		}
 	}
 

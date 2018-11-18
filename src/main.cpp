@@ -37,14 +37,12 @@ void display_data(Hot &hot)
 }
 
 int main(int argc, char *argv[])
-{
-	if (argc != 2) {
-        cerr << "argc should be 2" << endl;
-        return -1;
+{	
+	Hot hot;
+	if (argc == 2) {
+		hot.set_history(argv[1]);
 	}
-	
-	Hot hot(argv[1]);
-	Bet bet(hot);
+	Bet *pBet = new Bet(hot);
 	print_help();
 	input();
 	char cmd;
@@ -52,7 +50,7 @@ int main(int argc, char *argv[])
 		switch(cmd) {
 			case 'a':
 				read_data(hot);
-				bet.bet();
+				pBet->bet();
 				break;
 			case 'b':
 				display_data(hot);
@@ -72,9 +70,9 @@ int main(int argc, char *argv[])
 
 	if (!cin) {
 		cerr << "wrong cmd." << endl;
-		exit(1);
 	}
-	
+	delete pBet;
+
 	return 0;
 }
 

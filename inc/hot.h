@@ -16,7 +16,9 @@ struct HotRel
 class Hot
 {
 public:
-	Hot(const string &pre_file);
+	Hot();
+
+	void set_history(const string &pre_file);
 
 	int read_data(const vector<int> &in_data);
 

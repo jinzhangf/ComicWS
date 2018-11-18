@@ -7,14 +7,63 @@ inline int to_index(int num)
 	return num - 1;
 }
 
-Hot::Hot(const string &pre_file) : _types({5, 30, 50, 100})
+struct DateInfo
+{
+	int year;
+	int month;
+	int day;
+	int count;
+};
+
+DateInfo get_date_info(const string &date)
+{
+	DateInfo ret;
+	ret.year = std::atoi(date.substr(0, 4).c_str());
+	ret.month = std::atoi(date.substr(4, 2).c_str());
+	ret.day = std::atoi(date.substr(6,2).c_str());
+	ret.count = std::atoi(date.substr(8, 2).c_str());
+	return ret;
+}
+
+bool cmp_date(const string &old_date, const string &new_date)
+{
+	DateInfo old_date_info = get_date_info(old_date);
+	DateInfo new_date_info = get_date_info(new_date);
+	if (new_date_info.year > old_date_info.year) {
+		return true;
+	}
+	else if (new_date_info.year < old_date_info.year) {
+		return false;
+	}
+
+	if (new_date_info.month > old_date_info.month) {
+		return true;
+	}
+	else if (new_date_info.month < old_date_info.month) {
+		return false;
+	}
+
+	if (new_date_info.day > old_date_info.day) {
+		return true;
+	}
+	else if (new_date_info.day < old_date_info.day) {
+		return false;
+	}
+
+	return new_date_info.count > old_date_info.count;
+}
+
+Hot::Hot() : _types({5, 30, 50, 100})
 {
 	// init
 	for (auto type : _types) {
 		_hot_data[type];
 		_hot_rel[type];
 	}
+}
 
+void Hot::set_history(const string &pre_file)
+{
 	// read data
 	map<int, vector<int>> table; // key is used for sorting
 	ifstream infile(pre_file.c_str());
@@ -25,6 +74,7 @@ Hot::Hot(const string &pre_file) : _types({5, 30, 50, 100})
 
 	string line;
 	int line_nr = 0;
+	string last_date = "0000000000";
 	while (getline(infile, line)) {
 		line_nr++;
 		istringstream is(line);
@@ -35,6 +85,11 @@ Hot::Hot(const string &pre_file) : _types({5, 30, 50, 100})
 		   >> comma >> nums[3] >> comma >> nums[4];
 		//cout << date << "\t" << nums[0] << "," << nums[1] << ","
 		//     << nums[2] << "," << nums[3] << "," << nums[4] << endl;
+		if (!cmp_date(last_date, date)) {
+			cerr << "Error date. old:" << last_date << ", new:" << date << endl;
+			exit(1);
+		}
+		last_date = date;
 		table[INT_MAX - line_nr] = nums;
 	}
 	infile.close();
