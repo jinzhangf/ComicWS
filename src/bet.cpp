@@ -1,6 +1,7 @@
 #include "bet.h"
 #include "strategy1.h"
 #include "strategy_ren1.h"
+#include "strategy_ren3.h"
 #include "strategy_ren4.h"
 
 Bet::Bet(Hot &hot) : _hot(hot)
@@ -9,6 +10,7 @@ Bet::Bet(Hot &hot) : _hot(hot)
 	_money = INIT_MONEY;
 	_stg1 = new Strategy1(_money, _hot);
 	_stg_ren1 = new Strategy_Ren1(_money, _hot);
+	_stg_ren3 = new Strategy_Ren3(_money, _hot);
 	_stg_ren4 = new Strategy_Ren4(_money, _hot);
 }
 
@@ -28,9 +30,11 @@ void Bet::bet()
 	//vector<OneBet> bets_stg_ren1 = _stg_ren1->make_decision();
 	//_all_bets.insert(_all_bets.end(), bets_stg_ren1.begin(), bets_stg_ren1.end());
 
+	vector<OneBet> bets_stg_ren3 = _stg_ren3->make_decision();
+	_all_bets.insert(_all_bets.end(), bets_stg_ren3.begin(), bets_stg_ren3.end());
 
-	vector<OneBet> bets_stg_ren4 = _stg_ren4->make_decision();
-	_all_bets.insert(_all_bets.end(), bets_stg_ren4.begin(), bets_stg_ren4.end());
+	//vector<OneBet> bets_stg_ren4 = _stg_ren4->make_decision();
+	//_all_bets.insert(_all_bets.end(), bets_stg_ren4.begin(), bets_stg_ren4.end());
 }
 
 inline bool check_one_bet(const OneBet & one_bet)
