@@ -23,6 +23,11 @@ void Strategy::set_price(OneBet &one_bet)
 
 inline void check_money(int &m)
 {
+	if (m < 2) {
+		m = 2;
+		return;
+	}
+
 	if (m % 2) {
 		m++;
 	}
@@ -30,6 +35,10 @@ inline void check_money(int &m)
 
 void display_money(const OneBet &one_bet)
 {
+	static int flag = 0;
+	if (flag) return;
+	flag = 1;
+
 	int sum = 0;
 	for (auto val : one_bet._money) {
 		cout << val << " ";
@@ -43,7 +52,7 @@ void Strategy::set_bet_money(int count, int times, OneBet &one_bet)
 	set_price(one_bet);
 	one_bet._index = 0;
 	one_bet._money = vector<int> (count, times * 2);
-	//display_money(one_bet);
+	display_money(one_bet);
 }
 
 void Strategy::set_bet_money(int count, int init_times, double earn_rate, OneBet &one_bet)
@@ -113,7 +122,7 @@ void Strategy::set_bet_money(int count, int init_times,
 		one_bet._money.push_back(m);
 		all += m;
 	}
-	//display_money(one_bet);
+	display_money(one_bet);
 }
 
 
@@ -131,7 +140,7 @@ void Strategy::set_bet_money2(int count, int less_won_money, OneBet &one_bet)
 		one_bet._money.push_back(m);
 		all += m;
 	}
-	//display_money(one_bet);
+	display_money(one_bet);
 }
 
 

@@ -3,12 +3,12 @@
 Strategy1::Strategy1(int &money, Hot &hot) : _money(money), _hot(hot)
 {
 	//empty
-	cout << "Strategy1 !" << endl;
+	//cout << "Strategy1 !" << endl;
 }
 
 Strategy1::~Strategy1()
 {
-	cout << "Strategy1 ~" << endl;
+	//cout << "Strategy1 ~" << endl;
 }
 
 vector<OneBet> Strategy1::make_decision()

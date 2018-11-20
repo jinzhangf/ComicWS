@@ -20,6 +20,10 @@ Strategy_Ren4::~Strategy_Ren4()
 	}
 	cout << "sum:" << sum << endl;
 	cout << "average:" << average << endl;
+	for (auto count : _count_vec) {
+		cout << count << " ";
+	}
+	cout << endl;
 }
 
 vector<OneBet> Strategy_Ren4::make_decision()
@@ -40,6 +44,7 @@ void Strategy_Ren4::stats()
 		}
 	}
 	if (same_cnt >= 4) {
+		_count_vec.push_back(_count);
 		_table[_count]++;
 		_count = 0;
 	}

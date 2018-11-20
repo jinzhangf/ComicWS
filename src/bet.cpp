@@ -18,7 +18,16 @@ Bet::~Bet()
 {
 	delete _stg1;
 	delete _stg_ren1;
+	delete _stg_ren3;
 	delete _stg_ren4;
+
+	cout << "_money:" << _money << endl;
+	for (auto &onebet : _all_bets) {
+		for (auto m : onebet._money) {
+			_money += m;
+		}
+	}
+	cout << "_money:" << _money << endl;
 }
 
 void Bet::bet()
@@ -53,6 +62,7 @@ void Bet::display_one_bet(bool won, const OneBet &one_bet)
 {
 	cout << "won:" << won << " ";
 	cout << "type:"<< one_bet._play_type << " ";
+	cout << "_index:"<< one_bet._index << " ";
 	cout << "nums:";
 	for (auto num : one_bet._nums) {
 		cout << num;

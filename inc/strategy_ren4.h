@@ -21,6 +21,7 @@ private:
 	set<int> _last_data_set;
 	map<int, int> _table; // key: 隔的期数， value：次数
 	int _count; //不出现4个重号的期数
+	vector<int> _count_vec;
 };
 
 #endif
