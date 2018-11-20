@@ -17,6 +17,14 @@ vector<OneBet> Strategy_Ren3::make_decision()
 	vector<OneBet> ret;
 	vector<int> last_data = _hot.get_last_data();
 	sort(last_data.begin(), last_data.end());
+
+/*
+	cout << "last_data:";
+	for (auto val : last_data) {
+		cout << val << " ";
+	}
+	cout << endl;
+*/
 	for (size_t i = 0; i < last_data.size() - 2; ++i) {
 		if (last_data[i] + 1 == last_data[i + 1] &&
 			last_data[i + 1] + 1 == last_data[i + 2]) {
@@ -25,12 +33,12 @@ vector<OneBet> Strategy_Ren3::make_decision()
 			onebet._nums.push_back(last_data[i]);
 			onebet._nums.push_back(last_data[i + 1]);
 			onebet._nums.push_back(last_data[i + 2]);
-			set_bet_money(30, 1, 10, 1.0, 20, 1.0, onebet);
+			set_bet_money(20, 1, 10, 2, 10, 2, onebet);
 			ret.push_back(onebet);
-			int m = std::accumulate(onebet._money.begin(), onebet._money.end(), 0);
-			_money -= m;
-			cout << "bet:" << last_data[i] << "," << last_data[i+1] << ","
-			     << last_data[i+2] << " m:" << m << " _money:" << _money << endl;
+			//int m = std::accumulate(onebet._money.begin(), onebet._money.end(), 0);
+			//_money -= m;
+			//cout << "bet:" << last_data[i] << "," << last_data[i+1] << ","
+			//     << last_data[i+2] << " m:" << m << " _money:" << _money << endl;
 		}
 	}	
 	return ret;

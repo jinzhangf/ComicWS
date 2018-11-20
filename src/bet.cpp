@@ -40,7 +40,13 @@ void Bet::bet()
 	//_all_bets.insert(_all_bets.end(), bets_stg_ren1.begin(), bets_stg_ren1.end());
 
 	vector<OneBet> bets_stg_ren3 = _stg_ren3->make_decision();
-	_all_bets.insert(_all_bets.end(), bets_stg_ren3.begin(), bets_stg_ren3.end());
+	if (_all_bets.empty()) {
+		_all_bets.insert(_all_bets.end(), bets_stg_ren3.begin(), bets_stg_ren3.end());
+		for (auto &onebet : bets_stg_ren3) {
+			_money -= std::accumulate(onebet._money.begin(), onebet._money.end(), 0);
+		}
+	}
+	
 
 	//vector<OneBet> bets_stg_ren4 = _stg_ren4->make_decision();
 	//_all_bets.insert(_all_bets.end(), bets_stg_ren4.begin(), bets_stg_ren4.end());
