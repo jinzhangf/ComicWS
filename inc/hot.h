@@ -24,13 +24,16 @@ public:
 
 	vector<int> get_last_data();
 	vector<int> get_types();
+	size_t get_size() { return _data.size(); }
 
 	int get_hot_data(int type, int num);
 	vector<int> get_hot_data(int type);
+	vector<int> get_hot_data(vecotr<int> types);
 	vector<double> get_hot_data_stats();
 
 	int get_hot_rel_two(int type, int num1, int num2);
 	vector<vector<int>> get_hot_rel_two(int type);
+	vector<vector<int>> get_hot_rel_two(vecotr<int> types);
 	vector<vector<double>> get_hot_rel_two_stats();
 
 	void display_hot_origin();

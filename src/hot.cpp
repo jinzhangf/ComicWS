@@ -53,7 +53,7 @@ bool cmp_date(const string &old_date, const string &new_date)
 	return new_date_info.count > old_date_info.count;
 }
 
-Hot::Hot() : _types({5, 30, 50, 100})
+Hot::Hot() : _types({5, 10, 30, 50, 100})
 {
 	// init
 	for (auto type : _types) {
@@ -113,6 +113,18 @@ vector<int> Hot::get_hot_data(int type)
 	return ret;
 }
 
+vector<int> Hot::get_hot_data(vecotr<int> types)
+{
+	vector<int> ret(11, 0);
+	for (auto type : types) {
+		auto tmp = get_hot_data(type);
+		for (size_t i = 0; i < ret.size(); ++i) {
+			ret[i] += tmp[i];
+		}
+	}
+	return ret;
+}
+
 vector<double> Hot::get_hot_data_stats()
 {
 	vector<double> ret(11, 0);
@@ -152,6 +164,21 @@ vector<vector<int>> Hot::get_hot_rel_two(int type)
 	}
 	return ret;
 }
+
+vector<vector<int>> Hot::get_hot_rel_two(vecotr<int> types)
+{
+	vector<vector<int>> ret(11, vector<int> (11, 0));
+	for (auto type : types) {
+		auto tmp = get_hot_rel_two(type);
+		for (size_t i = 0; i < 11; ++i) {
+			for (size_t j = 0; j < 11; ++j) {
+				ret[i][j] += tmp[i][j];
+			}
+		}
+	}
+	return ret;
+}
+
 
 vector<vector<double>> Hot::get_hot_rel_two_stats()
 {
