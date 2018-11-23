@@ -23,6 +23,7 @@ private:
 	vector<OneBet> _all_bets;
 	Strategy *_stg1;
 	Strategy *_stg_ren1;
+	Strategy *_stg_ren2;
 	Strategy *_stg_ren3;
 	Strategy *_stg_ren4;
 };

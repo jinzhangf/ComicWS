@@ -113,7 +113,7 @@ vector<int> Hot::get_hot_data(int type)
 	return ret;
 }
 
-vector<int> Hot::get_hot_data(vecotr<int> types)
+vector<int> Hot::get_hot_data(vector<int> types)
 {
 	vector<int> ret(11, 0);
 	for (auto type : types) {
@@ -165,7 +165,7 @@ vector<vector<int>> Hot::get_hot_rel_two(int type)
 	return ret;
 }
 
-vector<vector<int>> Hot::get_hot_rel_two(vecotr<int> types)
+vector<vector<int>> Hot::get_hot_rel_two(vector<int> types)
 {
 	vector<vector<int>> ret(11, vector<int> (11, 0));
 	for (auto type : types) {

@@ -1,6 +1,7 @@
 #include "bet.h"
 #include "strategy1.h"
 #include "strategy_ren1.h"
+#include "strategy_ren2.h"
 #include "strategy_ren3.h"
 #include "strategy_ren4.h"
 
@@ -10,6 +11,7 @@ Bet::Bet(Hot &hot) : _hot(hot)
 	_money = INIT_MONEY;
 	_stg1 = new Strategy1(_money, _hot);
 	_stg_ren1 = new Strategy_Ren1(_money, _hot);
+	_stg_ren2 = new Strategy_Ren2(_money, _hot);
 	_stg_ren3 = new Strategy_Ren3(_money, _hot);
 	_stg_ren4 = new Strategy_Ren4(_money, _hot);
 }
@@ -18,6 +20,7 @@ Bet::~Bet()
 {
 	delete _stg1;
 	delete _stg_ren1;
+	delete _stg_ren2;
 	delete _stg_ren3;
 	delete _stg_ren4;
 
@@ -66,6 +69,7 @@ inline bool check_one_bet(const OneBet & one_bet)
 
 void Bet::display_one_bet(bool won, const OneBet &one_bet)
 {
+	_stg_ren2->win_or_not(won);
 	cout << "won:" << won << " ";
 	cout << "type:"<< one_bet._play_type << " ";
 	cout << "_index:"<< one_bet._index << " ";

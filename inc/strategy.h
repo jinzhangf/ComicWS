@@ -29,6 +29,7 @@ class Strategy
 public:
 	virtual ~Strategy() {}
 	virtual vector<OneBet> make_decision() = 0;
+	virtual void win_or_not(bool win) {}
 
 protected:
 	void set_bet_money(int count, int times, OneBet &one_bet);

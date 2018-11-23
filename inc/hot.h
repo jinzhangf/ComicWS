@@ -28,12 +28,12 @@ public:
 
 	int get_hot_data(int type, int num);
 	vector<int> get_hot_data(int type);
-	vector<int> get_hot_data(vecotr<int> types);
+	vector<int> get_hot_data(vector<int> types);
 	vector<double> get_hot_data_stats();
 
 	int get_hot_rel_two(int type, int num1, int num2);
 	vector<vector<int>> get_hot_rel_two(int type);
-	vector<vector<int>> get_hot_rel_two(vecotr<int> types);
+	vector<vector<int>> get_hot_rel_two(vector<int> types);
 	vector<vector<double>> get_hot_rel_two_stats();
 
 	void display_hot_origin();
