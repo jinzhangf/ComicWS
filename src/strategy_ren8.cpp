@@ -1,14 +1,13 @@
-#include "strategy_ren2.h"
+#include "strategy_ren8.h"
 
-Strategy_Ren2::Strategy_Ren2(int &money, Hot &hot) 
+Strategy_Ren8::Strategy_Ren8(int &money, Hot &hot) 
 	: _money(money), _hot(hot)
 {
 	//empty
 }
 
-Strategy_Ren2::~Strategy_Ren2()
+Strategy_Ren8::~Strategy_Ren8()
 {
-	/*
 	cout << "_win_table:" << endl;
 	for (auto &item : _win_table) {
 		cout << item.first << ":" << item.second << endl;
@@ -17,7 +16,6 @@ Strategy_Ren2::~Strategy_Ren2()
 	for (auto &item : _lose_table) {
 		cout << item.first << ":" << item.second << endl;
 	}
-	*/
 }
 
 struct CmpInfo
@@ -73,7 +71,7 @@ static int get_hot_paired(int num, vector<vector<CmpInfo>> &sorted_hot_rel, set<
 	return ret;
 }
 
-vector<OneBet> Strategy_Ren2::make_decision()
+vector<OneBet> Strategy_Ren8::make_decision()
 {
 	stats();
 	vector<OneBet> ret;
@@ -83,70 +81,41 @@ vector<OneBet> Strategy_Ren2::make_decision()
 	set<int> last_data_set(last_data.begin(), last_data.end());
 	vector<int> hot_data = _hot.get_hot_data({5, 10, 30});
 	vector<CmpInfo> hot_sorted_last_data;
-	for (auto num : last_data) {
+	for (int num = 1; num < 11; ++num) {
 		CmpInfo info;
 		info.num = num;
 		info.val = hot_data[num - 1];
 		hot_sorted_last_data.push_back(info);
 	}
 	sort(hot_sorted_last_data.begin(), hot_sorted_last_data.end(), cmp_hot);
-	display_cmpInfo("hot", hot_sorted_last_data);
-
-	//////////////////////////////
-	// test
 	/*
-	{
-		OneBet onebet;
-		onebet._play_type = PLAY_ONE_ANY;
-		onebet._nums.push_back(hot_sorted_last_data[0].num);
-		set_bet_money(1, 1, onebet);
-		_money -= 2;
-		ret.push_back(onebet);
-		return ret;
+	for (size_t i = 8; i < 11; ++i) {
+		if (last_data_set.count(hot_sorted_last_data[i].num) > 0) {
+			return ret;
+		}
 	}
 	*/
-	//////////////////////////////
 
-	vector<vector<CmpInfo>> sorted_hot_rel = get_sorted_hot_rel(_hot);
-	int first_hot = hot_sorted_last_data[0].num;
-	int first_hot_paired = get_hot_paired(first_hot, sorted_hot_rel, last_data_set);
-	int second_hot = hot_sorted_last_data[1].num;
-	int second_hot_paired = get_hot_paired(second_hot, sorted_hot_rel, last_data_set);
-	cout << "pair:" << first_hot << "," << first_hot_paired << "  " << second_hot << "," << second_hot_paired << endl;
-
-////////////////////////////////////////////////////////
-	/**
-	if (first_hot_paired == second_hot_paired) {
-		OneBet onebet;
-		onebet._play_type = PLAY_THREE;
-		onebet._nums.push_back(first_hot);
-		onebet._nums.push_back(first_hot_paired);
-		onebet._nums.push_back(second_hot);
-		set_bet_money(1, 1, onebet);
-		_money -= 2;
-		ret.push_back(onebet);
-		return ret;
-	}
-	return ret;
-	*********/
-	/////////////////////////////////////////////////////////
+	display_cmpInfo("hot", hot_sorted_last_data);
 	
 	OneBet onebet;
-	onebet._play_type = PLAY_TWO;
-	onebet._nums.push_back(first_hot);
-	onebet._nums.push_back(first_hot_paired);
+	onebet._play_type = PLAY_EIGHT;
+	for (size_t i = 0; i < 8; ++i) {
+		onebet._nums.push_back(hot_sorted_last_data[i].num);
+	}
 	set_bet_money(1, 1, onebet);
-	_money -= 2;
+	//set_bet_money(9, 1, 0.3, onebet);
+	//_money -= std::accumulate(onebet._money.begin(), onebet._money.end(), 0);
 	ret.push_back(onebet);
 
 	return ret;
 }
 
-void Strategy_Ren2::stats()
+void Strategy_Ren8::stats()
 {
 }
 
-void Strategy_Ren2::win_or_not(bool state)
+void Strategy_Ren8::win_or_not(bool state)
 {
 	static bool first_time = true;
 	if (first_time) {

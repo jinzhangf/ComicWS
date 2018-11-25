@@ -8,8 +8,10 @@ enum PlayType
 	PLAY_ONE = 1,     // 前一
 	PLAY_TWO = 2,     // 任选二
 	PLAY_THREE = 3,   //任选三
+	PLAY_EIGHT = 8,  // 任选八
 
 	PLAY_ONE_DOUBLE = 11, 
+	PLAY_ONE_ANY = 12, // 任一
 };
 
 struct OneBet

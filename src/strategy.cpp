@@ -15,6 +15,12 @@ void Strategy::set_price(OneBet &one_bet)
 	else if (one_bet._play_type == PLAY_ONE_DOUBLE) {
 		one_bet._price = 3.25;
 	}
+	else if (one_bet._play_type == PLAY_ONE_ANY) {
+		one_bet._price = 1.5;
+	}
+	else if (one_bet._play_type == PLAY_EIGHT) {
+		one_bet._price = 4.5;
+	}
 	else {
 		cerr << "unknow play_type:" << one_bet._play_type << endl;
 		exit(1);

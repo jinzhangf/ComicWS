@@ -26,6 +26,7 @@ private:
 	Strategy *_stg_ren2;
 	Strategy *_stg_ren3;
 	Strategy *_stg_ren4;
+	Strategy *_stg_ren8;
 };
 
 

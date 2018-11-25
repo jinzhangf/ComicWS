@@ -258,6 +258,12 @@ int Hot::read_data(const vector<int> &in_data)
 	}
 
 	_data.push_back(in_data);
+	/*
+	for (auto val : in_data) {
+		cout << val << "\t";
+	}
+	cout << endl;
+	*/
 	update_hot();
 
 	return 0;
